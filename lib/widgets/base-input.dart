@@ -29,6 +29,10 @@ class BaseTextInput extends StatelessWidget {
     return Container(
       child: TextFormField(
         controller: textCtrl,
+        style: TextStyle(
+          fontSize: 15,
+          color: CommonStyle.primaryColor,
+        ),
         decoration: new InputDecoration(
           hintText: hint,
           fillColor: Colors.grey[300].withOpacity(0.5),

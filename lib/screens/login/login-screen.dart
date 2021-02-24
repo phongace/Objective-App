@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:objective/config/constant.dart';
+import 'package:objective/styles/component.dart';
 import 'package:objective/widgets/background.dart';
 import 'package:objective/widgets/base-input.dart';
 import 'package:objective/widgets/rounded-button.dart';
@@ -19,15 +21,13 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Stack(
         children: [
           Background(),
-          Scaffold(
-            backgroundColor: Colors.transparent,
-            resizeToAvoidBottomPadding: false,
-            body: Padding(
+          SingleChildScrollView(
+            child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(height: 90),
                   Text(
                     'Hello',
                     style: TextStyle(
@@ -47,6 +47,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 50),
                   _buildBody(),
+                  const SizedBox(height: 120),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        Constant.TXT_HAVE_ACCOUNT,
+                        style: CommonStyle.defaultText(
+                          context,
+                          color: CommonStyle.whiteColor,
+                        ),
+                      ),
+                      const SizedBox(width: 2),
+                      Text(
+                        Constant.TXT_LOGIN.toUpperCase(),
+                        style: CommonStyle.boldText(
+                          context,
+                          color: CommonStyle.whiteColor,
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -79,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           const SizedBox(height: 50),
           RoundedButton(
-            text: 'Login',
+            text: Constant.TXT_LOGIN,
             onPress: () => login(context),
           ),
         ],

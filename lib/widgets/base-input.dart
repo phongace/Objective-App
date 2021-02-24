@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:objective/config/constant.dart';
 import 'package:objective/styles/component.dart';
 
 class BaseTextInput extends StatelessWidget {
@@ -34,10 +35,10 @@ class BaseTextInput extends StatelessWidget {
           prefixIcon: Icon(
             icon,
             color: CommonStyle.whiteColor,
-            size: 24,
+            size: 22,
           ),
           filled: true,
-          contentPadding: const EdgeInsets.only(top: 16, bottom: 16, left: 200),
+          contentPadding: const EdgeInsets.symmetric(vertical: 18.0),
           isDense: true,
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
@@ -49,11 +50,11 @@ class BaseTextInput extends StatelessWidget {
           hintStyle: CommonStyle.defaultText(context, color: CommonStyle.whiteColor),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Color(0xfffafafa)),
-            borderRadius: BorderRadius.all(Radius.circular(12.0)),
+            borderRadius: BorderRadius.all(Radius.circular(Constant.borderRadius)),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Color(0xfffafafa)),
-            borderRadius: BorderRadius.all(Radius.circular(12.0)),
+            borderRadius: BorderRadius.all(Radius.circular(Constant.borderRadius)),
           ),
         ),
         textInputAction: textInputAction,

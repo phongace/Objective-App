@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:objective/widgets/background.dart';
 import 'package:objective/widgets/base-input.dart';
+import 'package:objective/widgets/rounded-button.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -18,11 +19,13 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Stack(
         children: [
           Background(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: Flexible(
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            resizeToAvoidBottomPadding: false,
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -42,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  const SizedBox(height: 50),
                   _buildBody(),
                 ],
               ),
@@ -65,14 +69,23 @@ class _LoginScreenState extends State<LoginScreen> {
             keyboardType: TextInputType.emailAddress,
             validator: (val) => val.isEmpty ? "Email không được để trống!" : null,
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 24),
           BaseTextInput(
             hint: 'Password',
+            icon: Icons.lock,
             textCtrl: _password,
+            obscureText: true,
             validator: (val) => val.isEmpty ? "Password không được để trống!" : null,
+          ),
+          const SizedBox(height: 50),
+          RoundedButton(
+            text: 'Login',
+            onPress: () => login(context),
           ),
         ],
       ),
     );
   }
+
+  void login(BuildContext context) async {}
 }

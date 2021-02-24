@@ -5,6 +5,8 @@ class CommonStyle {
 
   static Color primaryColor = Color(0xff286BCF);
 
+  static Color bgColor = Color(0xffF4F4F5);
+
   static Color blackColor = Color(0xff000000);
 
   static TextStyle defaultText(BuildContext context, {double textSize, Color color}) {

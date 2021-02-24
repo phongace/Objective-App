@@ -10,8 +10,14 @@ class UserLoginForm {
       password: json['password'],
     );
   }
+
   Map<String, dynamic> toJson() => {
         'email': email,
         'password': password,
       };
+
+  @override
+  String toString() {
+    return 'email: $email - pass: $password';
+  }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:objective/config/constant.dart';
+import 'package:objective/models/user/user-login.dart';
+import 'package:objective/services/auth-service.dart';
 import 'package:objective/styles/component.dart';
 import 'package:objective/widgets/background.dart';
 import 'package:objective/widgets/base-input.dart';
@@ -11,8 +13,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  var _username = TextEditingController();
-  var _password = TextEditingController();
+  var _usernameCtlr = TextEditingController();
+  var _passwordCtlr = TextEditingController();
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
   @override
@@ -32,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     'Hello',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 34,
+                      fontSize: 38,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -41,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     'Login Now!',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 34,
+                      fontSize: 38,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -84,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           BaseTextInput(
             hint: 'Username',
-            textCtrl: _username,
+            textCtrl: _usernameCtlr,
             icon: Icons.person,
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.emailAddress,
@@ -94,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
           BaseTextInput(
             hint: 'Password',
             icon: Icons.lock,
-            textCtrl: _password,
+            textCtrl: _passwordCtlr,
             obscureText: true,
             validator: (val) => val.isEmpty ? "Password không được để trống!" : null,
           ),
@@ -108,5 +110,12 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void login(BuildContext context) async {}
+  void login(BuildContext context) async {
+    if (_formKey.currentState.validate()) {
+      UserLoginForm user = new UserLoginForm(email: _usernameCtlr.text.trim(), password: _passwordCtlr.text.trim());
+      AuthService.login(user).then(
+        (value) => print('done'),
+      );
+    }
+  }
 }

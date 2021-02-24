@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:objective/styles/component.dart';
 
 class DashboardHomePage extends StatefulWidget {
   @override
@@ -8,8 +9,17 @@ class DashboardHomePage extends StatefulWidget {
 class _DashboardHomePageState extends State<DashboardHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Hello it home'),
+    return Scaffold(
+      backgroundColor: CommonStyle.bgColor,
+      body: Column(
+        children: [
+          Row(
+            children: [
+              Text('hello world'),
+            ],
+          )
+        ],
+      ),
     );
   }
 }

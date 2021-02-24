@@ -49,6 +49,7 @@ class BaseTextInput extends StatelessWidget {
               color: Colors.red,
               width: 1.0,
             ),
+            borderRadius: BorderRadius.all(Radius.circular(Constant.borderRadius)),
           ),
           errorStyle: TextStyle(fontSize: 14.0),
           hintStyle: CommonStyle.defaultText(context, color: CommonStyle.whiteColor),

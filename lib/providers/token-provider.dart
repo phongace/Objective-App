@@ -1,11 +1,41 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:objective/models/common/token.dart';
+import 'package:objective/utils/shared-preference.dart';
 
 class TokenProvider extends ChangeNotifier {
-  String get token => _token;
+  TokenObj get tokenObj => _tokenObj;
 
-  String _token;
+  TokenObj _tokenObj;
 
   bool get isLogged => _isLogged;
 
   bool _isLogged = false;
+
+  Future<bool> getTokenObj() async {
+    _tokenObj = await SharedPrefsService.getTokenObj();
+    if (_tokenObj != null && _tokenObj.accessToken != null && _tokenObj.accessToken != '') {
+      _isLogged = true;
+    } else {
+      _isLogged = false;
+    }
+    notifyListeners();
+    return _isLogged;
+  }
+
+  Future<void> setTokenObj(String str) async {
+    await SharedPrefsService.setTokenObj(str);
+    Map map = jsonDecode(str);
+    _tokenObj = TokenObj.fromJson(map);
+    _isLogged = true;
+    notifyListeners();
+  }
+
+  void removeToken() {
+    SharedPrefsService.removeToken();
+    _tokenObj = new TokenObj();
+    _isLogged = false;
+    notifyListeners();
+  }
 }

@@ -15,9 +15,4 @@ class UserLoginForm {
         'email': email,
         'password': password,
       };
-
-  @override
-  String toString() {
-    return 'email: $email - pass: $password';
-  }
 }

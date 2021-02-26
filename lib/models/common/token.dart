@@ -6,11 +6,11 @@ class TokenObj {
   TokenObj({this.accessToken = '', this.refreshToken = ''});
 
   factory TokenObj.fromJson(Map<String, dynamic> json) {
-    return TokenObj(accessToken: json['access_token'], refreshToken: json['refresh_token']);
+    return TokenObj(accessToken: json['accessToken'], refreshToken: json['refreshToken']);
   }
 
   Map<String, dynamic> toJson() => {
-        'access_token': accessToken,
-        'refresh_token': refreshToken,
+        'accessToken': accessToken,
+        'refreshToken': refreshToken,
       };
 }

@@ -13,19 +13,19 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((_) => _loadNextScreen());
+    WidgetsBinding.instance.addPostFrameCallback((_) => _loadNextScreen());
   }
 
-  // _loadNextScreen() async {
-  //   bool isLogged = await Provider.of<TokenProvider>(context, listen: false).getToken();
-  //   print('is logged: ' + isLogged.toString());
-  //   if (!isLogged) {
-  //     await Future.delayed(const Duration(milliseconds: 1500));
-  //     Navigator.pushNamedAndRemoveUntil(context, RoutingNameConstant.loginScreen, (Route<dynamic> route) => false);
-  //   } else {
-  //     Navigator.pushNamedAndRemoveUntil(context, RoutingNameConstant.homeRoute, (Route<dynamic> route) => false);
-  //   }
-  // }
+  _loadNextScreen() async {
+    bool isLogged = await Provider.of<TokenProvider>(context, listen: false).getTokenObj();
+    print('is logged: ' + isLogged.toString());
+    if (!isLogged) {
+      await Future.delayed(const Duration(milliseconds: 1500));
+      Navigator.pushNamedAndRemoveUntil(context, RoutingNameConstant.loginScreen, (Route<dynamic> route) => false);
+    } else {
+      Navigator.pushNamedAndRemoveUntil(context, RoutingNameConstant.homeRoute, (Route<dynamic> route) => false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

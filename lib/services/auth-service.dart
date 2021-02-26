@@ -1,15 +1,15 @@
-import 'package:dio/dio.dart';
 import 'package:objective/config/constant.dart';
-import 'package:objective/models/user/user-login.dart';
+import 'package:objective/plugin/dio.dart';
+import 'package:objective/response/response-data.dart';
 
 class AuthService {
-  static Future<Response> login(UserLoginForm user) async {
+  static Future<ResponseData> login(Map data) async {
     try {
-      final repsonse = await Dio().post(Constant.apiUrl + 'login', data: user.toJson());
-      print(user);
-      print(repsonse);
-      return repsonse;
+      var repsonse = await http.post(Constant.apiUrl + 'login', data: data);
+      ResponseData responseData = repsonse.data;
+      return responseData;
     } catch (e) {
+      print(e);
       return null;
     }
   }

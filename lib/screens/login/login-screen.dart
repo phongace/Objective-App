@@ -1,11 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:objective/config/constant.dart';
-import 'package:objective/models/user/user-login.dart';
+import 'package:objective/providers/token-provider.dart';
 import 'package:objective/services/auth-service.dart';
 import 'package:objective/styles/component.dart';
 import 'package:objective/widgets/background.dart';
 import 'package:objective/widgets/base-input.dart';
 import 'package:objective/widgets/rounded-button.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -13,7 +16,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  var _usernameCtlr = TextEditingController();
+  var _emailCtlr = TextEditingController();
   var _passwordCtlr = TextEditingController();
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
@@ -85,8 +88,8 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Column(
         children: [
           BaseTextInput(
-            hint: 'Username',
-            textCtrl: _usernameCtlr,
+            hint: 'Email',
+            textCtrl: _emailCtlr,
             icon: Icons.person,
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.emailAddress,
@@ -111,11 +114,12 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void login(BuildContext context) async {
-    if (_formKey.currentState.validate()) {
-      UserLoginForm user = new UserLoginForm(email: _usernameCtlr.text.trim(), password: _passwordCtlr.text.trim());
-      AuthService.login(user).then(
-        (value) => print('done'),
-      );
-    }
+    if (!_formKey.currentState.validate()) {}
+    Map map = new Map();
+    map['email'] = _emailCtlr.text;
+    map['password'] = _passwordCtlr.text;
+    final response = await AuthService.login(map);
+    print('hello $response');
+    Provider.of<TokenProvider>(context, listen: false).setTokenObj(jsonEncode(response.data));
   }
 }

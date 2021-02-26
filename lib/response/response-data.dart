@@ -20,6 +20,6 @@ class ResponseData {
 
   @override
   String toString() {
-    return 'ResponseData{status: $status, message: $message, data: $data, pagination: $pagination}';
+    return 'ResponseData {status: $status, message: $message, data: $data, pagination: $pagination}';
   }
 }

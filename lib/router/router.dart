@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:objective/router/routing-name.dart';
-import 'package:objective/screens/dashboard/dashboard.dart';
+import 'package:objective/screens/layout/main.dart';
 import 'package:objective/screens/login/login-screen.dart';
 import 'package:objective/screens/splash/splash-creen.dart';
 

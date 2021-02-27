@@ -8,4 +8,8 @@ class Constant {
   static const TXT_HAVE_ACCOUNT = 'Already have an account?';
 
   static final sucessText = 'SUCESS';
+
+  static const TXT_TOPIC_SENTENCE = 'What do you';
+
+  static const TXT_TOPIC_SENTENCE_2 = 'want to do today?';
 }

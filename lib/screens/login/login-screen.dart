@@ -119,6 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
     map['email'] = _emailCtlr.text;
     map['password'] = _passwordCtlr.text;
     final response = await AuthService.login(map);
+    Navigator.of(context).pop();
     print('hello $response');
     Provider.of<TokenProvider>(context, listen: false).setTokenObj(jsonEncode(response.data));
   }

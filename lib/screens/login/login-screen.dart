@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:objective/config/constant.dart';
 import 'package:objective/providers/token-provider.dart';
+import 'package:objective/router/routing-name.dart';
 import 'package:objective/services/auth-service.dart';
 import 'package:objective/styles/component.dart';
 import 'package:objective/widgets/background.dart';
@@ -106,21 +107,33 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(height: 50),
           RoundedButton(
             text: Constant.TXT_LOGIN,
-            onPress: () => login(context),
+            onPress: () {
+              _handleLogin().then((value) {
+                if (value) {
+                  Navigator.of(context).pushNamedAndRemoveUntil(RoutingNameConstant.homeRoute, (route) => false);
+                }
+              });
+            },
           ),
         ],
       ),
     );
   }
 
-  void login(BuildContext context) async {
-    if (!_formKey.currentState.validate()) {}
+  Future<bool> _handleLogin() async {
+    if (!_formKey.currentState.validate()) {
+      return false;
+    }
     Map map = new Map();
     map['email'] = _emailCtlr.text;
     map['password'] = _passwordCtlr.text;
     final response = await AuthService.login(map);
-    Navigator.of(context).pop();
-    print('hello $response');
+    // Navigator.of(context).pop();
+    print(response);
+    if (response.data == null) {
+      return false;
+    }
     Provider.of<TokenProvider>(context, listen: false).setTokenObj(jsonEncode(response.data));
+    return true;
   }
 }

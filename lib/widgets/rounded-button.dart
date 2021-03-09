@@ -19,7 +19,7 @@ class RoundedButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(Constant.borderRadius),
         color: CommonStyle.whiteColor,
       ),
-      child: FlatButton(
+      child: TextButton(
         child: Text(
           text.toUpperCase(),
           style: CommonStyle.defaultText(context, color: CommonStyle.primaryColor),

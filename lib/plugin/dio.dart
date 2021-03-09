@@ -33,14 +33,18 @@ buildInterceptorsWrapper() {
       // Do something with response data
       if (response != null && response.data != null) {
         if (response.data['status'] != null) {
-          response.data['status'] = response.data['status'] == Constant.sucessText;
+          if (response.data['status'] == 'FAILED') {
+            response.data['status'] = Constant.failStatus;
+          } else {
+            response.data['status'] = Constant.sucessStatus;
+          }
         }
         ResponseData responseData = ResponseData.fromJson(response.data);
         String message = responseData.message ?? null;
         bool status = responseData.status;
         if (message != null && status != null) {
           String msg;
-          Color color = status ? Colors.blue[700] : Colors.red;
+          Color color = status ? Colors.blue[600] : Colors.red;
           msg = message;
           SnackbarBuilder.showSnackbar(msg, color);
         }

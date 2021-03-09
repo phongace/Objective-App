@@ -11,6 +11,8 @@ import 'package:objective/widgets/base-input.dart';
 import 'package:objective/widgets/rounded-button.dart';
 import 'package:provider/provider.dart';
 
+import '../../router/routing-name.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -29,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Background(),
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
+              padding: const EdgeInsets.symmetric(horizontal: 28.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -58,19 +60,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        Constant.TXT_HAVE_ACCOUNT,
+                        Constant.TXT_NO_ACCOUNT,
                         style: CommonStyle.defaultText(
                           context,
                           color: CommonStyle.whiteColor,
                         ),
                       ),
                       const SizedBox(width: 2),
-                      Text(
-                        Constant.TXT_LOGIN.toUpperCase(),
-                        style: CommonStyle.boldText(
-                          context,
-                          color: CommonStyle.whiteColor,
+                      GestureDetector(
+                        child: Text(
+                          Constant.TXT_REGISTER.toUpperCase(),
+                          style: CommonStyle.boldText(
+                            context,
+                            color: CommonStyle.whiteColor,
+                          ),
                         ),
+                        onTap: () => Navigator.pushNamed(context, RoutingNameConstant.registerScreen),
                       ),
                     ],
                   ),

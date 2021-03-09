@@ -4,7 +4,7 @@ import 'package:objective/styles/component.dart';
 
 abstract class DialogBuilder {
   static Future<bool> buildConfirmDialog({BuildContext context, String message, String imageSvg}) async {
-    Widget cancelButton = FlatButton(
+    Widget cancelButton = TextButton(
       child: Text(
         'Cancel',
         style: CommonStyle.defaultText(context),
@@ -14,7 +14,7 @@ abstract class DialogBuilder {
       },
     );
 
-    Widget okButton = FlatButton(
+    Widget okButton = TextButton(
       child: Text(
         'Confirm',
         style: CommonStyle.defaultText(context),

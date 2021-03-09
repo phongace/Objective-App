@@ -53,7 +53,7 @@ class _DashboardHomePageState extends State<DashboardHomePage> {
               unselectedItemColor: Theme.of(context).disabledColor,
               onTap: _onItemTapped,
               type: BottomNavigationBarType.fixed,
-              elevation: 1,
+              elevation: 0.0,
               showUnselectedLabels: true,
               selectedFontSize: 10,
               unselectedFontSize: 10,

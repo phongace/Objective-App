@@ -20,7 +20,6 @@ class _SetNameScreenState extends State<SetNameScreen> {
             hint: 'Tên người dùng',
             textCtrl: _usernameCtlr,
             icon: Icons.person,
-            textInputAction: TextInputAction.next,
             validator: (val) => val.isEmpty ? "Tên người dùng không được để trống!" : null,
           ),
         ],

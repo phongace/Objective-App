@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:objective/models/user/user.dart';
 import 'package:objective/providers/token-provider.dart';
+import 'package:objective/providers/user-provider.dart';
 import 'package:objective/router/routing-name.dart';
 import 'package:objective/widgets/background.dart';
 import 'package:provider/provider.dart';
@@ -18,12 +20,19 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _loadNextScreen() async {
     bool isLogged = await Provider.of<TokenProvider>(context, listen: false).getTokenObj();
-    print('is logged: ' + isLogged.toString());
+    User user = await Provider.of<UserProvider>(context, listen: false).getUser();
+    bool isNewUser = user?.isNewUser;
+    print(isNewUser);
+    print('is logged: $isLogged');
     if (!isLogged) {
       await Future.delayed(const Duration(milliseconds: 1500));
       Navigator.pushNamedAndRemoveUntil(context, RoutingNameConstant.loginScreen, (Route<dynamic> route) => false);
     } else {
-      Navigator.pushNamedAndRemoveUntil(context, RoutingNameConstant.homeRoute, (Route<dynamic> route) => false);
+      if (isNewUser) {
+        Navigator.pushNamedAndRemoveUntil(context, RoutingNameConstant.settingNameScreen, (Route<dynamic> route) => false);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(context, RoutingNameConstant.homeRoute, (Route<dynamic> route) => false);
+      }
     }
   }
 

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:objective/config/constant.dart';
 import 'package:objective/providers/token-provider.dart';
+import 'package:objective/providers/user-provider.dart';
 import 'package:objective/router/routing-name.dart';
 import 'package:objective/services/auth-service.dart';
 import 'package:objective/styles/component.dart';
@@ -21,7 +22,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   var _emailCtlr = TextEditingController();
   var _passwordCtlr = TextEditingController();
-  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = new GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 70),
                   _buildBody(),
                   const SizedBox(height: 120),
                   Row(
@@ -90,14 +91,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildBody() {
     return Form(
-      key: _formKey,
+      key: formKey,
       child: Column(
         children: [
           BaseTextInput(
             hint: 'Email',
             textCtrl: _emailCtlr,
             icon: Icons.person,
-            textInputAction: TextInputAction.next,
             keyboardType: TextInputType.emailAddress,
             validator: (val) => val.isEmpty ? "Email không được để trống!" : null,
           ),
@@ -126,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<bool> _handleLogin() async {
-    if (!_formKey.currentState.validate()) {
+    if (!formKey.currentState.validate()) {
       return false;
     }
     Map map = new Map();
@@ -139,6 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
       return false;
     }
     Provider.of<TokenProvider>(context, listen: false).setTokenObj(jsonEncode(response.data));
+    Provider.of<UserProvider>(context, listen: false).getUser();
     return true;
   }
 }

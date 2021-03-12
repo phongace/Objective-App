@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:objective/providers/token-provider.dart';
+import 'package:objective/providers/user-provider.dart';
 import 'package:objective/router/router.dart';
 import 'package:objective/screens/splash/splash-creen.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +10,10 @@ void main() {
   runApp(
     Phoenix(
       child: MultiProvider(
-        providers: [ChangeNotifierProvider(create: (context) => TokenProvider())],
+        providers: [
+          ChangeNotifierProvider(create: (context) => TokenProvider()),
+          ChangeNotifierProvider(create: (context) => UserProvider()),
+        ],
         child: MyApp(),
       ),
     ),

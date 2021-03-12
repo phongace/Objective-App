@@ -5,9 +5,14 @@ class User {
 
   String birthday;
 
-  String gender;
+  bool gender;
 
-  User({this.birthday, this.gender, this.name, this.isNewUser});
+  User({
+    this.name,
+    this.gender,
+    this.birthday,
+    this.isNewUser,
+  });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -16,5 +21,10 @@ class User {
       birthday: json['birthday'],
       gender: json['gender'],
     );
+  }
+
+  @override
+  String toString() {
+    return 'name: $name, isNewUser: $isNewUser, gender: $gender';
   }
 }

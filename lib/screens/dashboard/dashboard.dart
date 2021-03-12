@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:objective/config/constant.dart';
+import 'package:objective/providers/user-provider.dart';
 import 'package:objective/styles/component.dart';
+import 'package:provider/provider.dart';
 
 import '../../styles/component.dart';
 
@@ -118,9 +120,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: Image.asset('images/bot.png'),
             ),
             const SizedBox(width: 8),
-            Text(
-              'Hi, Phong!',
-              style: CommonStyle.defaultText(context),
+            Consumer<UserProvider>(
+              builder: (_, model, __) {
+                return Text(
+                  'Hi, ${model.user?.name ?? 'You'}!',
+                  style: CommonStyle.defaultText(context),
+                );
+              },
             ),
           ],
         ),

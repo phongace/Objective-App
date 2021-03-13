@@ -16,12 +16,24 @@ class _SetNameScreenState extends State<SetNameScreen> {
       body: Stack(
         children: [
           Background(),
-          BaseTextInput(
-            hint: 'Tên người dùng',
-            textCtrl: _usernameCtlr,
-            icon: Icons.person,
-            validator: (val) => val.isEmpty ? "Tên người dùng không được để trống!" : null,
-          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50.0),
+            child: Column(
+              children: [
+                BaseTextInput(
+                  hint: 'Tên người dùng',
+                  textCtrl: _usernameCtlr,
+                  icon: Icons.person,
+                  validator: (val) => val.isEmpty ? "Tên người dùng không được để trống!" : null,
+                ),
+                const SizedBox(height: 100),
+                Text(
+                  'dasdsdsad',
+                  style: TextStyle(color: Colors.white, fontSize: 40),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );

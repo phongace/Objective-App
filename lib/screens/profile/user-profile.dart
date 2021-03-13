@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:objective/providers/token-provider.dart';
 import 'package:objective/router/routing-name.dart';
 import 'package:objective/styles/component.dart';
-import 'package:objective/utils/dialog-builder.dart';
 import 'package:provider/provider.dart';
 
 class UserProfile extends StatefulWidget {

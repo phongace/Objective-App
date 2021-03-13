@@ -4,9 +4,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:objective/config/constant.dart';
 import 'package:objective/models/common/token.dart';
+import 'package:objective/plugin/locator.dart';
+import 'package:objective/plugin/navigator.dart';
 import 'package:objective/response/response-data.dart';
+import 'package:objective/router/routing-name.dart';
 import 'package:objective/utils/shared-preference.dart';
 import 'package:objective/utils/snackbar-builder.dart';
+
+final NavigationService _navigationService = locator<NavigationService>();
 
 Dio http = Dio(
   BaseOptions(
@@ -71,7 +76,7 @@ buildInterceptorsWrapper() {
           case DioErrorType.RESPONSE:
             print('Request with response error ${error.response}');
             if ((error.response?.statusCode == 401 || error.response?.statusCode == 403)) {
-              // _navigationService.navigatePushAndRemoveUntil(RoutingNameConstant.loginScreen);
+              _navigationService.navigatePushAndRemoveUntil(RoutingNameConstant.loginScreen);
               SnackbarBuilder.showSnackbar(
                 'You need to login to continue',
                 Colors.red,

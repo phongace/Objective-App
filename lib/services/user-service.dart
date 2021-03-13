@@ -15,4 +15,16 @@ abstract class UserService {
       return null;
     }
   }
+
+  static Future<User> updateName(Map data) async {
+    try {
+      final response = await http.put(Constant.apiUrl + 'user/updateName', data: data);
+      ResponseData responseData = response.data;
+      dynamic map = responseData.data;
+      User user = User.fromJson(map);
+      return user;
+    } catch (e) {
+      return null;
+    }
+  }
 }

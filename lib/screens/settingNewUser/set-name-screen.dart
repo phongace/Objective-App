@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:objective/styles/component.dart';
 import 'package:objective/widgets/background.dart';
 import 'package:objective/widgets/base-input.dart';
+import 'package:objective/widgets/next-button.dart';
 
 class SetNameScreen extends StatefulWidget {
   @override
@@ -20,22 +22,44 @@ class _SetNameScreenState extends State<SetNameScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50.0),
             child: Column(
               children: [
-                BaseTextInput(
-                  hint: 'Tên người dùng',
-                  textCtrl: _usernameCtlr,
-                  icon: Icons.person,
-                  validator: (val) => val.isEmpty ? "Tên người dùng không được để trống!" : null,
+                _columnCenter(),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: NextButton(
+                    color: CommonStyle.whiteColor,
+                    colorIcon: CommonStyle.primaryColor,
+                    colorText: CommonStyle.primaryColor,
+                    onPress: () {
+                      print('dsadasd');
+                    },
+                  ),
                 ),
-                const SizedBox(height: 100),
-                Text(
-                  'dasdsdsad',
-                  style: TextStyle(color: Colors.white, fontSize: 40),
-                )
               ],
             ),
           )
         ],
       ),
     );
+  }
+
+  Widget _columnCenter() {
+    var size = MediaQuery.of(context).size;
+    return Expanded(
+        child: Column(
+      children: [
+        Container(height: size.height * 0.3),
+        Text(
+          'Nhập tên bạn muốn hiển thị',
+          style: TextStyle(color: Colors.white, fontSize: 24),
+        ),
+        const SizedBox(height: 15),
+        BaseTextInput(
+          hint: 'Tên người dùng',
+          textCtrl: _usernameCtlr,
+          icon: Icons.person,
+          validator: (val) => val.isEmpty ? "Tên người dùng không được để trống!" : null,
+        ),
+      ],
+    ));
   }
 }

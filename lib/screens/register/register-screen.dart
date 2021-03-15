@@ -66,7 +66,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Constant.TXT_SOCIAL_MEDIA,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 18,
                     ),
                   ),
                   const SizedBox(height: 20),

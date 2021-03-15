@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:objective/screens/settingNewUser/second-intro-screen.dart';
+import 'package:objective/router/routing-name.dart';
 import 'package:objective/styles/component.dart';
 import 'package:objective/widgets/next-button.dart';
 
-class FirstIntroScreen extends StatelessWidget {
-  final Animation<double> transitionAnimation;
+class ThirdIntroScreen extends StatelessWidget {
+  final Animation<double> transitionAnimation3;
 
-  const FirstIntroScreen({Key key, this.transitionAnimation}) : super(key: key);
-
+  const ThirdIntroScreen({Key key, this.transitionAnimation3}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,13 +32,13 @@ class FirstIntroScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50.0),
         child: AnimatedBuilder(
-          animation: transitionAnimation,
+          animation: transitionAnimation3,
           builder: (context, child) {
             return SlideTransition(
               position: Tween<Offset>(
                 begin: Offset(1, 0),
                 end: Offset(0, 0),
-              ).animate(transitionAnimation),
+              ).animate(transitionAnimation3),
               child: child,
             );
           },
@@ -50,14 +49,7 @@ class FirstIntroScreen extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: NextButton(
                   onPress: () {
-                    Navigator.of(context).push(
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) {
-                          return SecondIntroScreen(transitionAnimation2: animation);
-                        },
-                        transitionDuration: Duration(seconds: 1),
-                      ),
-                    );
+                    Navigator.pushNamedAndRemoveUntil(context, RoutingNameConstant.homeRoute, (route) => false);
                   },
                 ),
               )
@@ -74,21 +66,21 @@ class FirstIntroScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'images/logo.png',
+            'images/receipt.png',
             height: 140,
           ),
           const SizedBox(height: 70),
           Text(
-            'Objective App',
+            'Financial management',
             style: TextStyle(
               color: Color(0XFF237CCB),
-              fontSize: 36,
+              fontSize: 34,
               fontWeight: FontWeight.w500,
             ),
           ),
           const SizedBox(height: 18),
           Text(
-            'Welcome to Objective App!',
+            'And manage your finances',
             style: TextStyle(
               color: Color(0XFF237CCB),
               fontSize: 19,
@@ -96,7 +88,7 @@ class FirstIntroScreen extends StatelessWidget {
           ),
           const SizedBox(height: 2),
           Text(
-            'Next to see what we can do for you',
+            'more effectively',
             style: TextStyle(
               color: Color(0XFF237CCB),
               fontSize: 19,

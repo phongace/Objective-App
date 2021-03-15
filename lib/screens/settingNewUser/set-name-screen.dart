@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:objective/router/routing-name.dart';
+import 'package:objective/screens/settingNewUser/first-intro-screen.dart';
 import 'package:objective/services/user-service.dart';
 import 'package:objective/styles/component.dart';
 import 'package:objective/widgets/background.dart';
@@ -17,6 +19,7 @@ class _SetNameScreenState extends State<SetNameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Background(),
@@ -33,7 +36,18 @@ class _SetNameScreenState extends State<SetNameScreen> {
                     colorText: CommonStyle.primaryColor,
                     onPress: () {
                       _handleUpdate().then((value) {
-                        if (value) {}
+                        if (value) {
+                          Navigator.of(context).push(
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation, secondaryAnimation) {
+                                return FirstIntroScreen(
+                                  transitionAnimation: animation,
+                                );
+                              },
+                              transitionDuration: Duration(seconds: 1),
+                            ),
+                          );
+                        }
                       });
                     },
                   ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:objective/router/routing-name.dart';
 import 'package:objective/screens/settingNewUser/first-intro-screen.dart';
 import 'package:objective/services/user-service.dart';
 import 'package:objective/styles/component.dart';

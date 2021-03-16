@@ -48,6 +48,7 @@ class ThirdIntroScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: NextButton(
+                  text: 'Start',
                   onPress: () {
                     Navigator.pushNamedAndRemoveUntil(context, RoutingNameConstant.homeRoute, (route) => false);
                   },

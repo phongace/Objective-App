@@ -25,11 +25,12 @@ class _SplashScreenState extends State<SplashScreen> {
     print('is logged: $isLogged');
     print('is new user: $isNewUser');
     if (!isLogged || isNewUser == null) {
-      await Future.delayed(const Duration(milliseconds: 1500));
+      await Future.delayed(const Duration(milliseconds: 2000));
       Navigator.pushNamedAndRemoveUntil(context, RoutingNameConstant.loginScreen, (Route<dynamic> route) => false);
     } else {
       if (isNewUser) {
-        Navigator.pushNamedAndRemoveUntil(context, RoutingNameConstant.settingNameScreen, (Route<dynamic> route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, RoutingNameConstant.settingNameScreen, (Route<dynamic> route) => false);
       } else {
         Navigator.pushNamedAndRemoveUntil(context, RoutingNameConstant.homeRoute, (Route<dynamic> route) => false);
       }

@@ -8,12 +8,14 @@ class NextButton extends StatefulWidget {
   final Function onPress;
   final Color colorIcon;
   final Color colorText;
+  final String text;
 
   const NextButton({
     Key key,
     this.color,
     this.colorIcon,
     this.colorText,
+    this.text,
     @required this.onPress,
   }) : super(key: key);
 
@@ -61,7 +63,7 @@ class _NextButtonState extends State<NextButton> with SingleTickerProviderStateM
             children: [
               const SizedBox(width: 2),
               Text(
-                'Next',
+                widget.text ?? 'Next',
                 style: TextStyle(
                   color: widget.colorText ?? CommonStyle.whiteColor,
                   fontSize: 18,

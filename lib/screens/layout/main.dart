@@ -63,9 +63,60 @@ class _DashboardHomePageState extends State<DashboardHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        backgroundColor: CommonStyle.primaryColor,
+        onPressed: () {
+          _addBottomSheet(context);
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
+  }
+
+  void _addBottomSheet(context) {
+    showModalBottomSheet(
+      context: context,
+      // isScrollControlled: true,
+      enableDrag: false,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30.0),
+          topRight: Radius.circular(30.0),
+        ),
+      ),
+      builder: (context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.8,
+          padding: const EdgeInsets.all(20.0),
+          child: DraggableScrollableSheet(
+            builder: (context, scrollController) {
+              return SingleChildScrollView(
+                controller: scrollController,
+                child: Column(
+                  children: [
+                    Text('dadsd'),
+                    Container(
+                      height: 200,
+                      color: Colors.red,
+                    ),
+                    Container(
+                      height: 200,
+                      color: Colors.blue,
+                    ),
+                    Container(
+                      height: 200,
+                      color: Colors.black,
+                    ),
+                    Container(
+                      height: 200,
+                      color: Colors.red,
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 

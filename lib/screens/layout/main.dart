@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:objective/screens/dashboard/dashboard.dart';
 import 'package:objective/screens/profile/user-profile.dart';
 import 'package:objective/styles/component.dart';
+import 'package:objective/widgets/custom-appbar.dart';
 
 class DashboardHomePage extends StatefulWidget {
   @override
@@ -75,8 +76,9 @@ class _DashboardHomePageState extends State<DashboardHomePage> {
   void _addBottomSheet(context) {
     showModalBottomSheet(
       context: context,
-      // isScrollControlled: true,
+      isScrollControlled: true,
       enableDrag: false,
+      backgroundColor: CommonStyle.whiteColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30.0),
@@ -84,36 +86,19 @@ class _DashboardHomePageState extends State<DashboardHomePage> {
         ),
       ),
       builder: (context) {
-        return Container(
-          height: MediaQuery.of(context).size.height * 0.8,
-          padding: const EdgeInsets.all(20.0),
-          child: DraggableScrollableSheet(
-            builder: (context, scrollController) {
-              return SingleChildScrollView(
-                controller: scrollController,
-                child: Column(
-                  children: [
-                    Text('dadsd'),
-                    Container(
-                      height: 200,
-                      color: Colors.red,
-                    ),
-                    Container(
-                      height: 200,
-                      color: Colors.blue,
-                    ),
-                    Container(
-                      height: 200,
-                      color: Colors.black,
-                    ),
-                    Container(
-                      height: 200,
-                      color: Colors.red,
-                    ),
-                  ],
-                ),
-              );
-            },
+        return ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
+          ),
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.7,
+            child: SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                child: CustomAppbar(),
+              ),
+            ),
           ),
         );
       },

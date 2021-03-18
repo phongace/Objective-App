@@ -78,6 +78,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Image.asset('images/google.png'),
                     ],
                   ),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),

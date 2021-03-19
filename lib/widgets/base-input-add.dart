@@ -19,7 +19,7 @@ class TextInputAdd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 46,
+      height: 50,
       child: TextFormField(
         controller: textCtrl,
         style: TextStyle(

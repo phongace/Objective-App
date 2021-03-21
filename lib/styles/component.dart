@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CommonStyle {
   static Color whiteColor = Color(0xffffffff);
 
-  static Color primaryColor = Color(0xff286BCF);
+  static Color primaryColor = Color(0xff5980BB);
 
   static Color bgColor = Color(0xffF4F4F5);
 

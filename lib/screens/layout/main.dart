@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:objective/screens/dashboard/dashboard.dart';
 import 'package:objective/screens/profile/user-profile.dart';
 import 'package:objective/styles/component.dart';
+import 'package:objective/widgets/custom-appbar.dart';
 
 class DashboardHomePage extends StatefulWidget {
   @override
@@ -63,9 +64,44 @@ class _DashboardHomePageState extends State<DashboardHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        backgroundColor: CommonStyle.primaryColor,
+        onPressed: () {
+          _addBottomSheet(context);
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
+  }
+
+  void _addBottomSheet(context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      backgroundColor: CommonStyle.whiteColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30.0),
+          topRight: Radius.circular(30.0),
+        ),
+      ),
+      builder: (context) {
+        return ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
+          ),
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.7,
+            child: SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                child: CustomAppbar(),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 

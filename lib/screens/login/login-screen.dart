@@ -31,56 +31,59 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Stack(
         children: [
           Background(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 28.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 90),
-                Text(
-                  'Hello',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 38,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  'Login Now!',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 38,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 70),
-                _buildBody(),
-                const SizedBox(height: 120),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      Constant.TXT_NO_ACCOUNT,
-                      style: CommonStyle.defaultText(
-                        context,
-                        color: CommonStyle.whiteColor,
-                      ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 28.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 90),
+                  Text(
+                    'Hello',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 38,
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(width: 2),
-                    GestureDetector(
-                      child: Text(
-                        Constant.TXT_REGISTER.toUpperCase(),
-                        style: CommonStyle.boldText(
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Login Now!',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 38,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 70),
+                  _buildBody(),
+                  const SizedBox(height: 110),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        Constant.TXT_NO_ACCOUNT,
+                        style: CommonStyle.defaultText(
                           context,
                           color: CommonStyle.whiteColor,
                         ),
                       ),
-                      onTap: () => Navigator.pushNamed(context, RoutingNameConstant.registerScreen),
-                    ),
-                  ],
-                ),
-              ],
+                      const SizedBox(width: 2),
+                      GestureDetector(
+                        child: Text(
+                          Constant.TXT_REGISTER.toUpperCase(),
+                          style: CommonStyle.boldText(
+                            context,
+                            color: CommonStyle.whiteColor,
+                          ),
+                        ),
+                        onTap: () => Navigator.pushNamed(context, RoutingNameConstant.registerScreen),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
           ),
         ],

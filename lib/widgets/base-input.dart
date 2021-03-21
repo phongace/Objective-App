@@ -32,7 +32,7 @@ class BaseTextInput extends StatelessWidget {
       ),
       decoration: new InputDecoration(
         hintText: hint,
-        fillColor: Colors.grey[300].withOpacity(0.5),
+        fillColor: Colors.grey[200].withOpacity(0.5),
         prefixIcon: Icon(
           icon,
           color: CommonStyle.whiteColor,
@@ -49,13 +49,13 @@ class BaseTextInput extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(Constant.borderRadius)),
         ),
         errorStyle: TextStyle(fontSize: 14.0),
-        hintStyle: CommonStyle.defaultText(context, color: CommonStyle.whiteColor),
+        hintStyle: CommonStyle.defaultText(context, color: CommonStyle.primaryColor),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xfffafafa)),
+          borderSide: BorderSide(color: CommonStyle.primaryColor),
           borderRadius: BorderRadius.all(Radius.circular(Constant.borderRadius)),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xfffafafa)),
+          borderSide: BorderSide(color: CommonStyle.primaryColor),
           borderRadius: BorderRadius.all(Radius.circular(Constant.borderRadius)),
         ),
       ),

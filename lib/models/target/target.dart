@@ -3,6 +3,8 @@ class Target {
 
   String description;
 
+  String time;
+
   bool isDone;
 
   bool isPriority;
@@ -10,6 +12,7 @@ class Target {
   Target({
     this.title,
     this.description,
+    this.time,
     this.isDone,
     this.isPriority,
   });
@@ -18,6 +21,7 @@ class Target {
     return Target(
       title: json['title'],
       description: json['description'],
+      time: json['time'],
       isDone: json['isDone'],
       isPriority: json['isPriority'],
     );
@@ -25,6 +29,6 @@ class Target {
 
   @override
   String toString() {
-    return 'title: $title, isDone: $isDone, isPriority: $isPriority';
+    return 'title: $title, time: $time, isDone: $isDone, isPriority: $isPriority';
   }
 }

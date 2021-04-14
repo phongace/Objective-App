@@ -21,7 +21,7 @@ class TextInputAdd extends StatelessWidget {
     return TextFormField(
       controller: textCtrl,
       style: TextStyle(
-        fontSize: 14,
+        fontSize: 15.0,
         color: CommonStyle.primaryColor,
         fontWeight: FontWeight.w400,
       ),

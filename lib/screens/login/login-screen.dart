@@ -136,7 +136,6 @@ class _LoginScreenState extends State<LoginScreen> {
     map['email'] = _emailCtlr.text;
     map['password'] = _passwordCtlr.text;
     final response = await AuthService.login(map);
-    // Navigator.of(context).pop();
     print(response);
     if (response.data == null) {
       return false;

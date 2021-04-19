@@ -66,6 +66,11 @@ buildInterceptorsWrapper() {
             break;
           case DioErrorType.CONNECT_TIMEOUT:
             print('DioErrorType.CONNECT_TIMEOUT');
+            print(error.response?.statusCode);
+            SnackbarBuilder.showSnackbar(
+              'You need to login to continue',
+              Colors.red,
+            );
             break;
           case DioErrorType.DEFAULT:
             print('DioErrorType.DEFAULT');

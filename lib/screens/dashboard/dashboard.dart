@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:objective/config/constant.dart';
 import 'package:objective/providers/user-provider.dart';
+import 'package:objective/screens/target/target-screen.dart';
 import 'package:objective/styles/component.dart';
 import 'package:provider/provider.dart';
 
@@ -33,16 +34,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _buildButton(
-                    context,
                     'images/goal_ic.png',
                     Color(0xFFD5E0F2),
                     'Target',
+                    () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => TargetScreen())),
                   ),
                   _buildButton(
-                    context,
                     'images/financial_ic.png',
                     Color(0xFFFFFF9B),
                     'Financial',
+                    () {
+                      print('2');
+                    },
                   ),
                 ],
               ),
@@ -51,16 +54,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _buildButton(
-                    context,
                     'images/appointment_ic.png',
                     Color(0xFFF6DBAC),
                     'Appointment',
+                    () {
+                      print('3');
+                    },
                   ),
                   _buildButton(
-                    context,
                     'images/statistics_ic.png',
                     Color(0xFFA4E572),
                     'Statistics',
+                    () {
+                      print('4');
+                    },
                   ),
                 ],
               ),
@@ -71,24 +78,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildButton(BuildContext context, String image, Color color, String name) {
+  Widget _buildButton(String image, Color color, String name, Function onPressed) {
     return Column(
       children: [
-        Container(
-          width: 155,
-          height: 155,
-          child: Image.asset(image),
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.all(
-              Radius.circular(15.0),
+        GestureDetector(
+          onTap: onPressed,
+          child: Container(
+            width: 155,
+            height: 155,
+            child: Image.asset(image),
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.all(
+                Radius.circular(15.0),
+              ),
             ),
           ),
         ),
         const SizedBox(height: 8),
         Text(
           name,
-          style: CommonStyle.boldText(context, textSize: 20),
+          style: CommonStyle.boldText(context, textSize: 19),
         )
       ],
     );

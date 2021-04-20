@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:objective/config/constant.dart';
 import 'package:objective/models/target/target.dart';
 import 'package:objective/providers/target-provider.dart';
 import 'package:objective/styles/component.dart';
@@ -14,6 +15,8 @@ class TargetScreen extends StatefulWidget {
 class _TargetScreenState extends State<TargetScreen> with SingleTickerProviderStateMixin {
   TabController _tabController;
   bool _isLoading = false;
+
+  String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 
   @override
   void initState() {
@@ -58,7 +61,7 @@ class _TargetScreenState extends State<TargetScreen> with SingleTickerProviderSt
               ),
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.66,
-                color: Theme.of(context).scaffoldBackgroundColor,
+                color: Color(0XFFF4F4F5),
                 child: SingleChildScrollView(
                   child: Container(
                     height: MediaQuery.of(context).size.height,
@@ -91,28 +94,28 @@ class _TargetScreenState extends State<TargetScreen> with SingleTickerProviderSt
                                 height: 40,
                                 width: 50,
                                 alignment: Alignment.center,
-                                color: Colors.white,
+                                color: Color(0XFFF4F4F5),
                                 child: Text('Ngày'),
                               ),
                               Container(
                                 height: 40,
                                 width: 50,
                                 alignment: Alignment.center,
-                                color: Colors.white,
+                                color: Color(0XFFF4F4F5),
                                 child: Text('Tuần'),
                               ),
                               Container(
                                 height: 40,
                                 width: 50,
                                 alignment: Alignment.center,
-                                color: Colors.white,
+                                color: Color(0XFFF4F4F5),
                                 child: Text('Tháng'),
                               ),
                               Container(
                                 height: 40,
                                 width: 50,
                                 alignment: Alignment.center,
-                                color: Colors.white,
+                                color: Color(0XFFF4F4F5),
                                 child: Text('Năm'),
                               ),
                             ],
@@ -120,19 +123,106 @@ class _TargetScreenState extends State<TargetScreen> with SingleTickerProviderSt
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 22.0),
                             child: TabBarView(
                               controller: _tabController,
                               children: [
                                 _isLoading
-                                    ? LoadingWidget()
+                                    ? LoadingWidget(padding: 140)
                                     : Consumer<TargetProvider>(
                                         builder: (context, targetProvider, child) {
                                           List<Target> targets = targetProvider.targets;
                                           return Column(
-                                            children: targets.map((target) {
-                                              return Text(target.title);
-                                            }).toList(),
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  RichText(
+                                                    text: TextSpan(
+                                                      children: [
+                                                        TextSpan(
+                                                          text: targets.length.toString(),
+                                                          style: TextStyle(
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: 18,
+                                                            color: CommonStyle.primaryColor,
+                                                            decoration: TextDecoration.underline,
+                                                          ),
+                                                        ),
+                                                        TextSpan(text: targets.length == 1 ? ' target' : ' targets', style: CommonStyle.defaultText(context)),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  RichText(
+                                                    text: TextSpan(
+                                                      children: [
+                                                        TextSpan(text: '1', style: CommonStyle.boldText(context)),
+                                                        TextSpan(text: ' trong ', style: CommonStyle.boldText(context, color: Colors.grey)),
+                                                        TextSpan(text: targets.length.toString(), style: CommonStyle.boldText(context, color: Colors.grey)),
+                                                        TextSpan(text: ' đã xong', style: CommonStyle.boldText(context, color: Colors.grey)),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Column(
+                                                children: targets.map((target) {
+                                                  return Padding(
+                                                    padding: const EdgeInsets.only(top: 24.0),
+                                                    child: Container(
+                                                      width: double.infinity,
+                                                      height: 50,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(Constant.borderRadius),
+                                                        color: CommonStyle.whiteColor,
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: Colors.grey.withOpacity(0.5),
+                                                            blurRadius: 4,
+                                                            offset: Offset(0, 5),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.only(right: 8.0),
+                                                        child: Row(
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            Container(
+                                                              width: 10,
+                                                              decoration: BoxDecoration(
+                                                                color: Colors.red,
+                                                                borderRadius: BorderRadius.only(
+                                                                  topLeft: Radius.circular(Constant.borderRadius),
+                                                                  bottomLeft: Radius.circular(Constant.borderRadius),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              capitalize(target.title),
+                                                              style: CommonStyle.boldText(
+                                                                context,
+                                                                textSize: 19,
+                                                              ),
+                                                            ),
+                                                            Checkbox(
+                                                              value: target.isDone,
+                                                              onChanged: (val) {
+                                                                setState(() {
+                                                                  target.isDone = val;
+                                                                });
+                                                              },
+                                                              checkColor: Colors.white,
+                                                              activeColor: Colors.red,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }).toList(),
+                                              ),
+                                            ],
                                           );
                                         },
                                       ),

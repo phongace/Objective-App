@@ -25,7 +25,7 @@ class CommonStyle {
 
   static TextStyle boldText(BuildContext context, {double textSize, Color color}) {
     return TextStyle(
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.w500,
       fontSize: textSize == null ? 18 : textSize,
       color: color == null ? primaryColor : color,
     );

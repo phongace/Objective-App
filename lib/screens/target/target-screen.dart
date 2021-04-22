@@ -175,7 +175,7 @@ class _TargetScreenState extends State<TargetScreen> with SingleTickerProviderSt
                                                   RichText(
                                                     text: TextSpan(
                                                       children: [
-                                                        TextSpan(text: '1', style: CommonStyle.boldText(context)),
+                                                        TextSpan(text: listDone.length.toString(), style: CommonStyle.boldText(context)),
                                                         TextSpan(text: ' trong ', style: CommonStyle.boldText(context, color: Colors.grey)),
                                                         TextSpan(text: targets.length.toString(), style: CommonStyle.boldText(context, color: Colors.grey)),
                                                         TextSpan(text: ' đã xong', style: CommonStyle.boldText(context, color: Colors.grey)),

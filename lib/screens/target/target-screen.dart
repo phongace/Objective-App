@@ -22,16 +22,33 @@ class _TargetScreenState extends State<TargetScreen> with SingleTickerProviderSt
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
-    loadTargetsInfo();
+    loadTargetsDone();
+    loadTargetsNotDone();
+    Provider.of<TargetProvider>(context, listen: false).getTarget();
   }
 
-  void loadTargetsInfo() {
-    List<Target> targets = Provider.of<TargetProvider>(context, listen: false).targets;
-    if (targets.isEmpty && this.mounted) {
+  void loadTargetsDone() {
+    List<Target> listDone = Provider.of<TargetProvider>(context, listen: false).listDone;
+    if (listDone.isEmpty && this.mounted) {
       setState(() {
         _isLoading = true;
       });
-      Provider.of<TargetProvider>(context, listen: false).getTarget().then((value) {
+      Provider.of<TargetProvider>(context, listen: false).getTargetDone().then((value) {
+        if (!this.mounted) return;
+        setState(() {
+          _isLoading = false;
+        });
+      });
+    }
+  }
+
+  void loadTargetsNotDone() {
+    List<Target> listNotDone = Provider.of<TargetProvider>(context, listen: false).listNotDone;
+    if (listNotDone.isEmpty && this.mounted) {
+      setState(() {
+        _isLoading = true;
+      });
+      Provider.of<TargetProvider>(context, listen: false).getTargetNotDone().then((value) {
         if (!this.mounted) return;
         setState(() {
           _isLoading = false;
@@ -132,6 +149,8 @@ class _TargetScreenState extends State<TargetScreen> with SingleTickerProviderSt
                                     : Consumer<TargetProvider>(
                                         builder: (context, targetProvider, child) {
                                           List<Target> targets = targetProvider.targets;
+                                          List<Target> listNotDone = targetProvider.listNotDone;
+                                          List<Target> listDone = targetProvider.listDone;
                                           return Column(
                                             children: [
                                               Row(
@@ -166,61 +185,21 @@ class _TargetScreenState extends State<TargetScreen> with SingleTickerProviderSt
                                                 ],
                                               ),
                                               Column(
-                                                children: targets.map((target) {
-                                                  return Padding(
-                                                    padding: const EdgeInsets.only(top: 24.0),
-                                                    child: Container(
-                                                      width: double.infinity,
-                                                      height: 50,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(Constant.borderRadius),
-                                                        color: CommonStyle.whiteColor,
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: Colors.grey.withOpacity(0.5),
-                                                            blurRadius: 4,
-                                                            offset: Offset(0, 5),
+                                                children: [
+                                                  _buildItem(listNotDone, context),
+                                                  listDone.length > 0
+                                                      ? Padding(
+                                                          padding: const EdgeInsets.only(top: 24.0),
+                                                          child: Divider(
+                                                            color: Colors.grey.withOpacity(0.3),
+                                                            thickness: 2.0,
+                                                            indent: 8.0,
+                                                            endIndent: 8.0,
                                                           ),
-                                                        ],
-                                                      ),
-                                                      child: Padding(
-                                                        padding: const EdgeInsets.only(right: 8.0),
-                                                        child: Row(
-                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                          children: [
-                                                            Container(
-                                                              width: 10,
-                                                              decoration: BoxDecoration(
-                                                                color: Colors.red,
-                                                                borderRadius: BorderRadius.only(
-                                                                  topLeft: Radius.circular(Constant.borderRadius),
-                                                                  bottomLeft: Radius.circular(Constant.borderRadius),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                              capitalize(target.title),
-                                                              style: CommonStyle.boldText(
-                                                                context,
-                                                                textSize: 19,
-                                                              ),
-                                                            ),
-                                                            Checkbox(
-                                                              value: target.isDone,
-                                                              onChanged: (val) {
-                                                                setState(() {
-                                                                  target.isDone = val;
-                                                                });
-                                                              },
-                                                              checkColor: Colors.white,
-                                                              activeColor: Colors.red,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                }).toList(),
+                                                        )
+                                                      : const SizedBox(),
+                                                  _buildItem(listDone, context),
+                                                ],
                                               ),
                                             ],
                                           );
@@ -248,6 +227,66 @@ class _TargetScreenState extends State<TargetScreen> with SingleTickerProviderSt
           )
         ],
       ),
+    );
+  }
+
+  Column _buildItem(List<Target> targets, BuildContext context) {
+    return Column(
+      children: targets.map((target) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 24.0),
+          child: Container(
+            width: double.infinity,
+            height: 55,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Constant.borderRadius),
+              color: CommonStyle.whiteColor,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  blurRadius: 4,
+                  offset: Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 10,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(Constant.borderRadius),
+                        bottomLeft: Radius.circular(Constant.borderRadius),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    capitalize(target.title),
+                    style: CommonStyle.boldText(
+                      context,
+                      textSize: 19,
+                    ),
+                  ),
+                  Checkbox(
+                    value: target.isDone,
+                    onChanged: (val) {
+                      setState(() {
+                        target.isDone = val;
+                      });
+                    },
+                    checkColor: Colors.white,
+                    activeColor: Colors.red,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 }

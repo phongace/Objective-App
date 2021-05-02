@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:objective/config/constant.dart';
 import 'package:objective/models/target/target.dart';
 import 'package:objective/providers/target-provider.dart';
@@ -168,17 +169,27 @@ class _TargetScreenState extends State<TargetScreen> with SingleTickerProviderSt
                                                             decoration: TextDecoration.underline,
                                                           ),
                                                         ),
-                                                        TextSpan(text: targets.length == 1 ? ' target' : ' targets', style: CommonStyle.defaultText(context)),
+                                                        TextSpan(
+                                                            text: targets.length == 1 ? ' target' : ' targets',
+                                                            style: CommonStyle.defaultText(context)),
                                                       ],
                                                     ),
                                                   ),
                                                   RichText(
                                                     text: TextSpan(
                                                       children: [
-                                                        TextSpan(text: listDone.length.toString(), style: CommonStyle.boldText(context)),
-                                                        TextSpan(text: ' trong ', style: CommonStyle.boldText(context, color: Colors.grey)),
-                                                        TextSpan(text: targets.length.toString(), style: CommonStyle.boldText(context, color: Colors.grey)),
-                                                        TextSpan(text: ' đã xong', style: CommonStyle.boldText(context, color: Colors.grey)),
+                                                        TextSpan(
+                                                            text: listDone.length.toString(),
+                                                            style: CommonStyle.boldText(context)),
+                                                        TextSpan(
+                                                            text: ' trong ',
+                                                            style: CommonStyle.boldText(context, color: Colors.grey)),
+                                                        TextSpan(
+                                                            text: targets.length.toString(),
+                                                            style: CommonStyle.boldText(context, color: Colors.grey)),
+                                                        TextSpan(
+                                                            text: ' đã xong',
+                                                            style: CommonStyle.boldText(context, color: Colors.grey)),
                                                       ],
                                                     ),
                                                   )
@@ -233,57 +244,84 @@ class _TargetScreenState extends State<TargetScreen> with SingleTickerProviderSt
   Column _buildItem(List<Target> targets, BuildContext context) {
     return Column(
       children: targets.map((target) {
-        return Padding(
-          padding: const EdgeInsets.only(top: 24.0),
-          child: Container(
-            width: double.infinity,
-            height: 55,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Constant.borderRadius),
-              color: CommonStyle.whiteColor,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  blurRadius: 4,
-                  offset: Offset(0, 5),
-                ),
-              ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 10,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(Constant.borderRadius),
-                        bottomLeft: Radius.circular(Constant.borderRadius),
-                      ),
-                    ),
-                  ),
-                  Text(
-                    capitalize(target.title),
-                    style: CommonStyle.boldText(
-                      context,
-                      textSize: 19,
-                    ),
-                  ),
-                  Checkbox(
-                    value: target.isDone,
-                    onChanged: (val) {
-                      setState(() {
-                        target.isDone = val;
-                      });
-                    },
-                    checkColor: Colors.white,
-                    activeColor: Colors.red,
+        return Theme(
+          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+          child: ExpansionTile(
+            tilePadding: const EdgeInsets.only(top: 24.0),
+            title: Container(
+              width: double.infinity,
+              height: 55,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Constant.borderRadius),
+                color: CommonStyle.whiteColor,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    blurRadius: 4,
+                    offset: Offset(0, 5),
                   ),
                 ],
               ),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 10,
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(Constant.borderRadius),
+                          bottomLeft: Radius.circular(Constant.borderRadius),
+                        ),
+                      ),
+                    ),
+                    target.isDone
+                        ? Text(
+                            capitalize(target.title),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
+                              color: Colors.grey,
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          )
+                        : Text(
+                            capitalize(target.title),
+                            style: CommonStyle.boldText(context, textSize: 19),
+                          ),
+                    Checkbox(
+                      value: target.isDone,
+                      onChanged: (val) {
+                        setState(() {
+                          target.isDone = val;
+                        });
+                      },
+                      checkColor: Colors.white,
+                      activeColor: Colors.red,
+                    ),
+                  ],
+                ),
+              ),
             ),
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: CommonStyle.whiteColor,
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(Constant.borderRadius),
+                    bottomLeft: Radius.circular(Constant.borderRadius),
+                  ),
+                ),
+                child: Text(
+                  target.title,
+                  style: TextStyle(fontWeight: FontWeight.w700),
+                ),
+              )
+            ],
           ),
         );
       }).toList(),

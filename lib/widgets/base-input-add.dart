@@ -18,43 +18,37 @@ class TextInputAdd extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      child: TextFormField(
-        controller: textCtrl,
-        style: TextStyle(
-          fontSize: 15,
-          color: CommonStyle.primaryColor,
-          fontWeight: FontWeight.w500,
-        ),
-        decoration: new InputDecoration(
-          hintText: hint,
-          fillColor: Colors.grey[200].withOpacity(0.5),
-          filled: true,
-          isDense: true,
-          errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.red,
-              width: 1.0,
-            ),
-            borderRadius: BorderRadius.all(Radius.circular(Constant.borderRadius)),
-          ),
-          errorStyle: TextStyle(fontSize: 14.0),
-          hintStyle: CommonStyle.defaultText(context, color: CommonStyle.primaryColor),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: CommonStyle.primaryColor),
-            borderRadius: BorderRadius.all(Radius.circular(Constant.borderRadius)),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: CommonStyle.primaryColor),
-            borderRadius: BorderRadius.all(Radius.circular(Constant.borderRadius)),
-          ),
-        ),
-        validator: validator,
-        onChanged: (value) {
-          this.onChanged(value);
-        },
+    return TextFormField(
+      controller: textCtrl,
+      style: TextStyle(
+        fontSize: 15.0,
+        color: CommonStyle.primaryColor,
+        fontWeight: FontWeight.w400,
       ),
+      decoration: new InputDecoration(
+        hintText: hint,
+        fillColor: Colors.grey[200].withOpacity(0.5),
+        filled: true,
+        isDense: true,
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.red,
+            width: 1.0,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(Constant.borderRadius)),
+        ),
+        errorStyle: TextStyle(fontSize: 14.0),
+        hintStyle: CommonStyle.defaultText(context, color: CommonStyle.primaryColor),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: CommonStyle.primaryColor),
+          borderRadius: BorderRadius.all(Radius.circular(Constant.borderRadius)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: CommonStyle.primaryColor),
+          borderRadius: BorderRadius.all(Radius.circular(Constant.borderRadius)),
+        ),
+      ),
+      validator: validator,
     );
   }
 }

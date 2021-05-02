@@ -11,7 +11,7 @@ class BaseTextInput extends StatelessWidget {
   final bool obscureText;
   final IconData icon;
 
-  const BaseTextInput({
+  BaseTextInput({
     Key key,
     this.textCtrl,
     this.onChanged,
@@ -20,7 +20,7 @@ class BaseTextInput extends StatelessWidget {
     this.keyboardType,
     this.obscureText = false,
     this.icon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +62,6 @@ class BaseTextInput extends StatelessWidget {
       keyboardType: keyboardType,
       obscureText: obscureText,
       validator: validator,
-      onChanged: (value) {
-        this.onChanged(value);
-      },
     );
   }
 }

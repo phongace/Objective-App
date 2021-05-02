@@ -152,7 +152,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     map['email'] = _emailCtlr.text;
     map['password'] = _passwordCtlr.text;
     final response = await AuthService.register(map);
-    // Navigator.of(context).pop();
     print(response);
     if (response.data == null) {
       return false;

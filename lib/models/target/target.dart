@@ -1,30 +1,29 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'target.g.dart';
+
+@JsonSerializable()
 class Target {
   String title;
 
   String description;
 
+  String time;
+
   bool isDone;
 
   bool isPriority;
 
-  Target({
-    this.title,
-    this.description,
-    this.isDone,
-    this.isPriority,
-  });
+  List<dynamic> subTask;
 
-  factory Target.fromJson(Map<String, dynamic> json) {
-    return Target(
-      title: json['title'],
-      description: json['description'],
-      isDone: json['isDone'],
-      isPriority: json['isPriority'],
-    );
-  }
+  Target({this.title, this.description, this.time, this.isDone, this.isPriority, this.subTask});
+
+  factory Target.fromJson(Map<String, dynamic> json) => _$TargetFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TargetToJson(this);
 
   @override
   String toString() {
-    return 'title: $title, isDone: $isDone, isPriority: $isPriority';
+    return 'title: $title, time: $time, isDone: $isDone, isPriority: $isPriority, subTask: $subTask';
   }
 }

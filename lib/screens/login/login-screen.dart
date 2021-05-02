@@ -14,6 +14,8 @@ import 'package:provider/provider.dart';
 
 import '../../router/routing-name.dart';
 
+final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -22,7 +24,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   var _emailCtlr = TextEditingController();
   var _passwordCtlr = TextEditingController();
-  final GlobalKey<FormState> formKey = new GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildBody() {
     return Form(
-      key: formKey,
+      key: _formKey,
       child: Column(
         children: [
           BaseTextInput(
@@ -128,14 +129,13 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<bool> _handleLogin() async {
-    if (!formKey.currentState.validate()) {
+    if (!_formKey.currentState.validate()) {
       return false;
     }
     Map map = new Map();
     map['email'] = _emailCtlr.text;
     map['password'] = _passwordCtlr.text;
     final response = await AuthService.login(map);
-    // Navigator.of(context).pop();
     print(response);
     if (response.data == null) {
       return false;
